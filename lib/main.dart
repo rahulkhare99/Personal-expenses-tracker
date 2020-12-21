@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:daily_expenses/screens/account_balance_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ import './models/transaction.dart';
 import './widgets/chart.dart';
 import './widgets/new_transactions.dart';
 import './widgets/transactions_list.dart';
+import 'widgets/app_drawer.dart';
 
 void main() {
   // SystemChrome.setPreferredOrientations([
@@ -44,6 +46,9 @@ class MyApp extends StatelessWidget {
                 ),
           )),
       home: MyHomePage(),
+      routes: {
+        AccountBalanceScreen.routeName: (ctx) => AccountBalanceScreen(),
+      },
     );
   }
 }
@@ -202,19 +207,19 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
             ),
           )
         : AppBar(
-            title: Text(
-              'Personal Expenses',
-            ),
             actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {},
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.menu),
+              //   onPressed: AppDrawer
+              // ),
               IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () => _startAddNewTransaction(context),
               ),
             ],
+            title: Text(
+              'Personal Expenses',
+            ),
           );
   }
 
@@ -260,6 +265,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           )
         : Scaffold(
             appBar: appBar,
+            drawer: AppDrawer(),
             body: pageBody,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
